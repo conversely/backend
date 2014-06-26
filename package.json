@@ -1,0 +1,31 @@
+{
+  "name": "conversely-backend",
+  "version": "0.0.0",
+  "description": "backend for conversely forum",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/conversely/backend.git"
+  },
+  "keywords": [
+    "forum",
+    "conversely",
+    "backend"
+  ],
+  "author": "conversely team",
+  "private": true,
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/conversely/backend/issues"
+  },
+  "homepage": "https://github.com/conversely/backend",
+  "devDependencies": {
+    "tape": "^2.13.3"
+  }
+}
