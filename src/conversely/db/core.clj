@@ -7,7 +7,24 @@
 
 (declare users)
 
+(defentity emails
+  (belongs-to users))
+
+(defentity handles
+  (belongs-to users))
+
+(defentity roles
+  (belongs-to users))
+
+(defentity users
+  (has-many emails)
+  (has-many handles)
+  (has-many roles))
+
 (defn get-user [id]
   (first (select users
+                 (with emails)
+                 (with handles)
+                 (with roles)
                  (where {:id id})
                  (limit 1))))
