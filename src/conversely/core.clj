@@ -1,5 +1,7 @@
 (ns conversely.core
-  (:require [conversely.db.core :as db]))
+  (:require [conversely.db.core :as db]
+            [crypto.password.bcrypt :as bcrypt]
+            [clj-time.core :as timec]))
 
 (defn get-user
   "load user from database by id"
@@ -13,8 +15,10 @@
 (defn create-user
   "add user to database"
   [firstname lastname password]
-  ;; FIXME: don't just put the password in the DB
-  (db/add-user! {:firstname firstname :lastname lastname :password password}))
+  (db/add-user! (assoc {:firstname firstname
+                        :lastname lastname
+                        :password (bcrypt/encrypt password)}
+                       :createtime (timec/now))))
 
 (defn get-post
   "load post from database by id"
@@ -23,4 +27,8 @@
     (cond
           (nil? createtime) nil
      :else
-     {:author user_id :title title :body body :reference reference :createtime createtime})))
+     {:author user_id
+      :title title
+      :body body
+      :reference reference
+      :createtime createtime})))
