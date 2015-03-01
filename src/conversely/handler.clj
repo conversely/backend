@@ -19,6 +19,10 @@
        (if-let [user (conversely/get-user id)]
          (respond user)
          (respond 404 "Not Found")))
+  (GET "/post/:id" [id]
+       (if-let [post (conversely/get-post id)]
+         (respond post)
+         (respond 404 "Not Found")))
   (route/not-found "Not Found"))
 
 (def app
