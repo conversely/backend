@@ -43,11 +43,21 @@
   (first (select posts
                  (with users)
                  (with comments)
-                 (where {:id id})
+                 (where {:reference id})
+                 (order :createtime)
                  (limit 1))))
 
 (defn add-post! [post-data]
   (insert! posts post-data))
+
+(defn get-comment [id]
+  (first (select comments
+                 (with user)
+                 (with comments)
+                 (with posts)
+                 (where {:reference id})
+                 (order :createtime)
+                 (limit 1))))
 
 (defn add-comment! [comment-data]
   (insert! comments comment-data))
