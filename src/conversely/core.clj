@@ -8,9 +8,9 @@
   [id]
   (let [{:keys [firstname lastname password createtime]} (db/get-user id)]
     (cond
-          (nil? createtime) nil
-     :else
-     {:firstname firstname :lastname lastname :createtime createtime})))
+      (nil? createtime) nil
+      :else
+      {:firstname firstname :lastname lastname :createtime createtime})))
 
 (defn auth-user
   "validates user with password"
@@ -31,13 +31,13 @@
   [id]
   (let [{:keys [user_id title body reference createtime]} (db/get-post id)]
     (cond
-          (nil? createtime) nil
-     :else
-     {:author user_id
-      :title title
-      :body body
-      :reference reference
-      :createtime createtime})))
+      (nil? createtime) nil
+      :else
+      {:author user_id
+       :title title
+       :body body
+       :reference reference
+       :createtime createtime})))
 
 (defn create-post
   "add a post to the db"
@@ -49,17 +49,17 @@
   "load comment from database by id"
   [id]
   (let [{:keys [user_id parent_id post_id title body reference createtime]}
-         (db/get-comment id)]
+        (db/get-comment id)]
     (cond
-          (nil? createtime) nil
-     :else
-     {:author user_id
-      :title title
-      :body body
-      :reference reference
-      :createtime createtime
-      :post-id post_id
-      :parent-id parent_id})))
+      (nil? createtime) nil
+      :else
+      {:author user_id
+       :title title
+       :body body
+       :reference reference
+       :createtime createtime
+       :post-id post_id
+       :parent-id parent_id})))
 
 (defn create-comment
   "add a comment to the db"

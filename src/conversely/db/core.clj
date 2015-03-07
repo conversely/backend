@@ -64,4 +64,4 @@
 
 (defn- insert! [table-name row-data]
   (insert table-name
-          (values row-data))
+          (values row-data)))
