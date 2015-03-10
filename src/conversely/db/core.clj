@@ -5,7 +5,7 @@
 
 (defdb db schema/db-spec)
 
-(declare users roles posts comments)
+(declare users emails handles roles posts comments)
 
 (defentity users
   (has-many emails)
@@ -27,6 +27,10 @@
 
 (defentity roles
   (many-to-many users :users_roles))
+
+(defn- insert! [table-name row-data]
+  (insert table-name
+          (values row-data)))
 
 (defn get-user [id]
   (first (select users
@@ -52,7 +56,7 @@
 
 (defn get-comment [id]
   (first (select comments
-                 (with user)
+                 (with users)
                  (with comments)
                  (with posts)
                  (where {:reference id})
@@ -61,7 +65,3 @@
 
 (defn add-comment! [comment-data]
   (insert! comments comment-data))
-
-(defn- insert! [table-name row-data]
-  (insert table-name
-          (values row-data)))

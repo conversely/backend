@@ -30,14 +30,12 @@
   "load post from database by id"
   [id]
   (let [{:keys [user_id title body reference createtime]} (db/get-post id)]
-    (cond
-      (nil? createtime) nil
-      :else
-      {:author user_id
-       :title title
-       :body body
-       :reference reference
-       :createtime createtime})))
+    (if (nil? createtime) nil
+        {:author user_id
+         :title title
+         :body body
+         :reference reference
+         :createtime createtime})))
 
 (defn create-post
   "add a post to the db"
